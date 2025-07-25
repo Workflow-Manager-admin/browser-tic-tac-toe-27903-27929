@@ -1,104 +1,149 @@
-/* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --primary: #1976d2;
+  --secondary: #90caf9;
+  --accent: #ff5252;
+  --bg: #ffffff;
+  --square-bg: #f5f7fa;
+  --border: #e3e7ed;
+  --font-main: 'Inter', 'Roboto', 'Arial', sans-serif;
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
-}
-
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+body, #root, .ttt-root {
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  font-family: var(--font-main);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Header Bar */
+.ttt-header {
+  height: 56px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.04);
+  padding: 0 2rem;
+  background: var(--primary);
+  color: #fff;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.ttt-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
 }
 
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.ttt-reset-btn {
+  padding: 0.4rem 1.1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background .2s, transform .12s;
+  box-shadow: 0 1px 4px rgba(255,82,82,.10);
+}
+.ttt-reset-btn:hover, .ttt-reset-btn:focus {
+  background: #ff7979;
+  transform: translateY(-2px) scale(1.04);
+}
+
+.ttt-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 56px - 64px); /* header/footer heights */
+}
+
+.ttt-board {
   display: flex;
   flex-direction: column;
+  gap: 0;
+  background: var(--bg);
+  border-radius: 16px;
+  box-shadow: 0 4px 32px rgba(25, 118, 210, 0.05),
+              0 1.5px 6px rgba(25, 118, 210, 0.02);
+  padding: 2.2vw 2vw;
+  min-width: 310px;
+  min-height: 310px;
+}
+
+.ttt-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.ttt-square {
+  width: 72px;
+  height: 72px;
+  margin: 6px;
+  border: 2.5px solid var(--border);
+  border-radius: 13px;
+  background: var(--square-bg);
+  color: var(--primary);
+  font-size: 2.8rem;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.16s, color 0.14s, border-color .19s;
+  user-select: none;
+  box-shadow: 0 1px 6px rgba(25, 118, 210, 0.05);
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.ttt-square:disabled {
+  cursor: default;
+  opacity: 0.65;
+  background: #f5f7fa;
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
+.ttt-square:hover:not(:disabled), .ttt-square:focus-visible:not(:disabled) {
+  background: #e3edfb;
+  border-color: var(--primary);
+  color: var(--accent);
+}
+
+.ttt-square.highlight {
+  background: var(--secondary);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.ttt-footer {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  font-size: 1.22rem;
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding-bottom: .2rem;
+  margin-top: 1.3rem;
+  letter-spacing: .01em;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .ttt-header { padding: 0 0.5rem; font-size: 1rem; height: 48px;}
+  .ttt-title { font-size: 1.15rem; }
+  .ttt-reset-btn { font-size: .92rem; padding: 0.35rem 0.9rem;}
+  .ttt-board { min-width: 98vw; min-height: 300px; padding: 4vw 1vw; }
+  .ttt-square { width: 19vw; height: 19vw; min-width: 52px; min-height: 52px; font-size: 2.1rem;}
+  .ttt-footer { font-size: 1rem; min-height: 42px; }
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
-  }
+/* Prevent system drag highlight */
+.ttt-square:active {
+  outline: none;
 }
